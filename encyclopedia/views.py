@@ -22,3 +22,11 @@ def intres(request,title):
     return render(request, "encyclopedia/inter.html", {
       "bomba":htmlContent
       })
+
+def search(request):
+    userSearch = request.POST.get('q')
+    util.get_entry(userSearch)
+    htmlContent =  convertMarkdown(userSearch)
+    return render(request, "encyclopedia/inter.html", {
+      "bomba":htmlContent
+      })
