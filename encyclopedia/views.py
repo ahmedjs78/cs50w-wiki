@@ -24,9 +24,14 @@ def intres(request,title):
       })
 
 def search(request):
-    userSearch = request.POST.get('q')
-    util.get_entry(userSearch)
-    htmlContent =  convertMarkdown(userSearch)
-    return render(request, "encyclopedia/inter.html", {
-      "bomba":htmlContent
-      })
+    userSearch = request.POST.get('q').upper()
+    print(userSearch)
+    if userSearch in util.list_entries():
+        util.get_entry(userSearch)
+        htmlContent =  convertMarkdown(userSearch)
+        return render(request, "encyclopedia/inter.html", {
+        "bomba":htmlContent })
+    else: 
+        return render(request, "encyclopedia/inter.html", {
+        "eroorMassage":f"eroor {userSearch} is not found"
+        })
