@@ -1,7 +1,6 @@
 {% load static %}
 
 <!DOCTYPE html>
-
 <html lang="en">
     <head>
         <title>{% block title %}{% endblock %}</title>
@@ -20,7 +19,8 @@
                     <a href="{% url 'index' %}">Home</a>
                 </div>
                 <div>
-                    Create New Page
+                    <a href="{% url 'creatpage' %}">Create New Page</a>
+                    
                 </div>
                 <div>
                     <a href="{% url 'randompage' %}">Random Page</a>
@@ -33,6 +33,5 @@
                 {% endblock %}
             </div>
         </div>
-
     </body>
 </html>

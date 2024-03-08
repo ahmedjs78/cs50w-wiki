@@ -27,56 +27,32 @@ def search(request):
     userSearch = request.POST.get('q').lower()
     allentries_lower = [entry.lower() for entry in util.list_entries()]
     list = []
+    recommendation = True
     if userSearch not in allentries_lower:
+        recommendation = False
         for i in userSearch:
             print(f"{i} for i")
             for l in allentries_lower:
                 print(f"{l} for l")
                 if i in l:
-                
-                    list.append(l)
-                    print(f"for last loop / {list}")
+                    if l in list:
+                        continue
+                    else:
+                        list.append(l)
+                        print(f"for last loop / {list}")
             else:
                 continue
             break
         else:
             # This block will execute if no break occurred in the inner loop
-            htmlContent = convertMarkdown(l)
-            print(htmlContent)
-            return render(request, "encyclopedia/inter.html", {"bomba": htmlContent,"skrta": list})
-
+            uperlist = [ uplist.upper() for uplist in list]
+            entries = uperlist
+            return render(request, "encyclopedia/index.html", {"entries": entries,})
     # If userSearch is in allentries_lower, execute the following block
     if userSearch in allentries_lower:
         util.get_entry(userSearch)
         htmlContent = convertMarkdown(userSearch)
-        return render(request, "encyclopedia/inter.html", {"bomba": htmlContent})
-
-    # userSearch = request.POST.get('q').lower()
-    # allentries_lower = [entry.lower() for entry in util.list_entries()]
-    # for i in userSearch:
-    #     print(f"{i} for i")
-    #     for l in allentries_lower:
-    #         print(f"{l} for l")
-    #         if i in l :
-    #             print(i)
-    #             break  # Break out of the inner loop if a match is found
-    #     else:
-    #         continue
-    #     break
-    # else:
-    #     htmlContent =  convertMarkdown(l)
-    #     return render(request, "encyclopedia/inter.html", {
-    #     "bomba":htmlContent })
-    
-    # if userSearch in  allentries_lower:
-    #     util.get_entry(userSearch)
-    #     htmlContent =  convertMarkdown(userSearch)
-    #     return render(request, "encyclopedia/inter.html", {
-    #     "bomba":htmlContent })
-    #     else:
-    #         return render(request, "encyclopedia/inter.html", {
-    #         "eroorMassage":f"eroor {userSearch} is not found"
-    #         })
+        return render(request, "encyclopedia/inter.html",{"bomba": htmlContent})
 
 
 
@@ -90,3 +66,16 @@ def randompage(request):
    return render(request, "encyclopedia/inter.html", {
        "dd":htmlenret
    })
+
+def creatpage(request):
+    b = 'db'
+    return render(request, "encyclopedia\creat_newpage.html",
+                  {"b":b})
+
+
+def savepage(request):
+    title = request.POST.get('titleq')
+    description = request.POST.get('description')
+    util.save_entry(title, description)
+    
+    return render(request, "encyclopedia\index.html")
