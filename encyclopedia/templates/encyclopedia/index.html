@@ -5,8 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    <h1>All Pages</h1>
+{% if nothinginlist %}
+    <h1>Sorry, we couldn't find any results for your search.</h1>
 
+    <h1>did you mean </h1>
     <ul>
         {% for entry in entries %}
         <li>
@@ -14,5 +16,17 @@
         </li>
         {% endfor %}
     </ul>
+{% else %}
+    <h1>All Pages</h1>
+    <ul>
+        {% for entry in entries %}
+        <li>
+            <a href="{% url 'intres' title=entry%}">{{ entry }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+   
 
 {% endblock %}

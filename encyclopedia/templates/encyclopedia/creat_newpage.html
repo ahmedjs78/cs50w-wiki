@@ -1,13 +1,17 @@
 {% extends "encyclopedia/layout.html" %}
 {% block body %}
 
+    <h1 class="text-red-400">gfgggggggggg</h1>
+    <div class="bg-black w-[100%] h-[100%]">
 
-    <form action="{% url 'savepage' %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="titleq" >
-        <textarea name="description"  cols="30" rows="10"></textarea>
-        <button type="submit"> save page</button>
-    </form>
-
+        
+        <form action="{% url 'savepage' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="titleq" >
+            <textarea name="description"  cols="30" rows="10"></textarea>
+            <button type="submit"> save page</button>
+        </form>
+        
+    </div>
 
 {% endblock %}

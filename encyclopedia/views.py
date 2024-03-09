@@ -20,36 +20,41 @@ def intres(request,title):
     htmlContent =  convertMarkdown(title)
     print(htmlContent)
     return render(request, "encyclopedia/inter.html", {
-      "bomba":htmlContent
-      })
+      "bomba":htmlContent,"title":title})
+
 
 def search(request):
     userSearch = request.POST.get('q').lower()
     allentries_lower = [entry.lower() for entry in util.list_entries()]
     list = []
-    recommendation = True
+    nothinginlist = False
+    recommendation = False
     if userSearch not in allentries_lower:
-        recommendation = False
+        recommendation = True
         for i in userSearch:
-            print(f"{i} for i")
             for l in allentries_lower:
-                print(f"{l} for l")
                 if i in l:
                     if l in list:
+                        
                         continue
                     else:
                         list.append(l)
-                        print(f"for last loop / {list}")
             else:
                 continue
-            break
         else:
-            # This block will execute if no break occurred in the inner loop
-            uperlist = [ uplist.upper() for uplist in list]
-            entries = uperlist
-            return render(request, "encyclopedia/index.html", {"entries": entries,})
+            if list == []:
+                nothinginlist = True
+                return render(request, "encyclopedia/index.html", {"nothinginlist":nothinginlist})
+            else:
+                # This block will execute if no break occurred in the inner loop
+                # if search is non and recomndation is non return a massage no recomndation using list 
+                uperlist = [ uplist.upper() for uplist in list]
+                entries = uperlist
+                print(list)
+                return render(request, "encyclopedia/index.html", {"entries": entries,"recommendation": recommendation,"list": list, "nothinginlist":nothinginlist})
     # If userSearch is in allentries_lower, execute the following block
     if userSearch in allentries_lower:
+        print("the last line")
         util.get_entry(userSearch)
         htmlContent = convertMarkdown(userSearch)
         return render(request, "encyclopedia/inter.html",{"bomba": htmlContent})
@@ -68,14 +73,20 @@ def randompage(request):
    })
 
 def creatpage(request):
-    b = 'db'
-    return render(request, "encyclopedia\creat_newpage.html",
-                  {"b":b})
+    return render(request, "encyclopedia\creat_newpage.html",)
 
 
 def savepage(request):
     title = request.POST.get('titleq')
     description = request.POST.get('description')
     util.save_entry(title, description)
-    
-    return render(request, "encyclopedia\index.html")
+    htmlContent =  convertMarkdown(title)
+    print(htmlContent)
+    return render(request, "encyclopedia/inter.html", {
+      "bomba":htmlContent,"title":title})
+
+
+def editpage(requst):
+    entrey_title = requst.POST.get("entry_title")
+    content = util.get_entry(entrey_title)
+    return render(requst,"encyclopedia\editpage.html", {"entrey_title":entrey_title,"content":content})
