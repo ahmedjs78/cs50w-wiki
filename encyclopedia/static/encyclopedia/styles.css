@@ -36,3 +36,9 @@ textarea {
 .sidebar h2 {
     margin-top: 5px;
 }
+
+.nav-links{
+    color: rgb(59, 133, 186);
+    font-size: 20px;
+    font-weight: 600;
+}

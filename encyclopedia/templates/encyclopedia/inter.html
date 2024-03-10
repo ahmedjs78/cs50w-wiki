@@ -1,6 +1,7 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block body %}
+
    {{title}}
    {{bomba|safe}}
    {{dd|safe}}
@@ -9,6 +10,6 @@
    <form action="{% url 'editpage'%}" method="POST">
       {% csrf_token %}
       <input type="hidden" name="entry_title" value="{{ title }}">
-     <button type="submit">Edit</button>
+     <button class="text-[#3b85ba] text-[24px] p-[15px]" type="submit">Edit</button>
    </form>
 {% endblock %}

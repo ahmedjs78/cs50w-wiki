@@ -1,7 +1,9 @@
 {% extends "encyclopedia/layout.html" %}
 {% block body %}
 {{entrey_title}}
-        <h1>edit page</h1>
+
+    <h1  class="text-[34px] text-[bold] mb-[40px]" >edit page</h1>
+    <div class="bg-black w-[80%] h-[1.5px] mb-[30px]"></div>
     <form action="{% url 'savepage' %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="titleq" required value="{{entrey_title}}">

@@ -7,26 +7,26 @@
 {% block body %}
 {% if nothinginlist %}
     <h1>Sorry, we couldn't find any results for your search.</h1>
-
-    <h1>did you mean </h1>
+{% elif recommendation %}
+    <h1  class="text-[34px] text-[bold] mb-[40px]">did you mean </h1>
+    <div class="bg-black w-[80%] h-[1.5px] mb-[30px]"></div>
     <ul>
         {% for entry in entries %}
-        <li>
+        <li class="text-[#3b85ba] text-[bold] text-[24px]">
             <a href="{% url 'intres' title=entry%}">{{ entry }}</a>
         </li>
         {% endfor %}
     </ul>
 {% else %}
-    <h1>All Pages</h1>
-    <ul>
+    <h1 class="text-[34px] text-[bold] mb-[40px]">All Pages</h1>
+    <div class="bg-black w-[80%] h-[1.5px] mb-[30px]"></div>
+    <ul class="p-[10px]">
         {% for entry in entries %}
-        <li>
-            <a href="{% url 'intres' title=entry%}">{{ entry }}</a>
+        <li class="text-[#3b85ba] text-[bold] text-[24px]" >
+        <a href="{% url 'intres' title=entry%}">{{ entry }}</a>
         </li>
         {% endfor %}
     </ul>
 {% endif %}
-
-   
 
 {% endblock %}

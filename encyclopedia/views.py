@@ -44,7 +44,7 @@ def search(request):
         else:
             if list == []:
                 nothinginlist = True
-                return render(request, "encyclopedia/index.html", {"nothinginlist":nothinginlist})
+                return render(request, "encyclopedia/index.html", {"nothinginlist":nothinginlist,"recommendation":recommendation})
             else:
                 # This block will execute if no break occurred in the inner loop
                 # if search is non and recomndation is non return a massage no recomndation using list 
