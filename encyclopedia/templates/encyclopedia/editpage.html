@@ -6,9 +6,12 @@
     <div class="bg-black w-[80%] h-[1.5px] mb-[30px]"></div>
     <form action="{% url 'savepage' %}" method="post">
         {% csrf_token %}
+
         <input type="hidden" name="titleq" required value="{{entrey_title}}">
-        <textarea name="description"  cols="30" rows="5">{{content}}</textarea>
-        <button type="submit"> save page</button>
+        <div class="">
+            <textarea name="description"  cols="30" rows="5">{{content}}</textarea>
+            <button type="submit"> save page</button>
+        </div>
     </form>
 
 {% endblock %}

@@ -1,15 +1,23 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block body %}
-
-   {{title}}
+   
    {{bomba|safe}}
+
    {{dd|safe}}
    {{eroorMassage}}
 
    <form action="{% url 'editpage'%}" method="POST">
       {% csrf_token %}
       <input type="hidden" name="entry_title" value="{{ title }}">
-     <button class="text-[#3b85ba] text-[24px] p-[15px]" type="submit">Edit</button>
+     <button class="text-[#3b85ba] text-[24px] mt-[10px]" type="submit">Edit</button>
    </form>
-{% endblock %}
+   <form action="{% url 'deletepage' %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="entry_title" value="{{ title }}">
+      <button type="submit">Delete</button>
+   </form>
+
+
+
+   {% endblock %}

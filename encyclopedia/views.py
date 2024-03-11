@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 import markdown
 import random
 from . import util
+import os
 
 
 def convertMarkdown(title):
@@ -78,7 +79,7 @@ def creatpage(request):
 
 def savepage(request):
     title = request.POST.get('titleq')
-    description = request.POST.get('description')
+    description = request.POST.get('content')
     util.save_entry(title, description)
     htmlContent =  convertMarkdown(title)
     print(htmlContent)
@@ -90,3 +91,9 @@ def editpage(requst):
     entrey_title = requst.POST.get("entry_title")
     content = util.get_entry(entrey_title)
     return render(requst,"encyclopedia\editpage.html", {"entrey_title":entrey_title,"content":content})
+
+def deletepage(request):
+    ll = request.POST.get('entry_title')
+    print(ll)
+    os.remove(f"entries\{request.POST.get('entry_title')}.md")
+    return redirect('index')
