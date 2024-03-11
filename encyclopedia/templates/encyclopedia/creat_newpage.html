@@ -1,12 +1,15 @@
 {% extends "encyclopedia/layout.html" %}
 {% block body %}
 
-    <h1 class="text-black text-[40px] pb-[30px]">Creat new page</h1>
+    <h1 class="text-black text-[40px] pb-[10px]">Creat new page</h1>
     <div class="bg-black w-[90%] h-[1px]"></div>
     <div class=" w-[50%]">
 
         <form action="{% url 'savepage' %}" method="post">
             {% csrf_token %}
+
+<p>{{ data }}</p>
+
             <div class="relative mt-[10px]">
                 <label class="label1 ml-[10px] absolute" for="title">Title</label>
                 <input class="input1" type="text" name="titleq" id="title">
@@ -16,7 +19,7 @@
                 <label class="active absolute ml-[15px]" for="content"> Type your content here </label>
                 <textarea class="textar" name="content" id="content" cols="30" rows="10"></textarea>
             </div>
-                <button  class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs text-[bolder] uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong " type="submit"> save page</button>
+                <button  class="text-[#3b85ba] text-[24px] mt-[10px]" type="submit"> save page</button>
 
         </form>
         

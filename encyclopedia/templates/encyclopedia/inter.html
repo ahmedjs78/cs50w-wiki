@@ -15,7 +15,7 @@
    <form action="{% url 'deletepage' %}" method="POST">
       {% csrf_token %}
       <input type="hidden" name="entry_title" value="{{ title }}">
-      <button type="submit">Delete</button>
+      <button class="text-[#3b85ba] text-[24px] mt-[10px]" type="submit">Delete</button>
    </form>
 
 

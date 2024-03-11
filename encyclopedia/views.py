@@ -3,7 +3,7 @@ import markdown
 import random
 from . import util
 import os
-
+from django.urls import reverse
 
 def convertMarkdown(title):
     content = util.get_entry(title)
@@ -80,11 +80,15 @@ def creatpage(request):
 def savepage(request):
     title = request.POST.get('titleq')
     description = request.POST.get('content')
-    util.save_entry(title, description)
-    htmlContent =  convertMarkdown(title)
-    print(htmlContent)
-    return render(request, "encyclopedia/inter.html", {
-      "bomba":htmlContent,"title":title})
+    massage = "this name alredy exists"
+    if title in util.list_entries():
+        return render(request, "encyclopedia\error.html")
+    else:
+        util.save_entry(title, description)
+        htmlContent =  convertMarkdown(title)
+        print(htmlContent)
+        return render(request, "encyclopedia/inter.html", {
+        "bomba":htmlContent,"title":title})
 
 
 def editpage(requst):
