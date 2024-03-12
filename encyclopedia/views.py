@@ -80,7 +80,6 @@ def creatpage(request):
 def savepage(request):
     title = request.POST.get('titleq')
     description = request.POST.get('content')
-    massage = "this name alredy exists"
     if title in util.list_entries():
         return render(request, "encyclopedia\error.html")
     else:
@@ -91,10 +90,18 @@ def savepage(request):
         "bomba":htmlContent,"title":title})
 
 
-def editpage(requst):
-    entrey_title = requst.POST.get("entry_title")
-    content = util.get_entry(entrey_title)
-    return render(requst,"encyclopedia\editpage.html", {"entrey_title":entrey_title,"content":content})
+def editpage(request):
+    if request.method == 'POST':
+        title = request.POST.get('titleq')
+        description = request.POST.get('description')
+        util.save_entry(title, description)
+        entry =  util.get_entry(title)
+        return redirect('intres', title=title)
+    else:
+        title = request.GET.get('entry_title')
+        content = util.get_entry(title)
+        return render(request,"encyclopedia\editpage.html", {"title":title,"content":content})
+        
 
 def deletepage(request):
     ll = request.POST.get('entry_title')
