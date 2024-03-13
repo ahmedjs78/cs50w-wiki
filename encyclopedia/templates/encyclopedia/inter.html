@@ -7,7 +7,7 @@
    {{dd|safe}}
    {{eroorMassage}}
 
-   <form action="{% url 'editpage'%}" method="POST">
+   <form action="{% url 'editpage'%}" method="GET">
       {% csrf_token %}
       <input type="hidden" name="entry_title" value="{{ title }}">
      <button class="text-[#3b85ba] text-[24px] mt-[10px]" type="submit">Edit</button>

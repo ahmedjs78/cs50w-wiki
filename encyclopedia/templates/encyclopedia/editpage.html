@@ -4,13 +4,13 @@
 
     <h1  class="text-[34px] text-[bold] mb-[40px]" >edit page</h1>
     <div class="bg-black w-[80%] h-[1.5px] mb-[30px]"></div>
-    <form action="{% url 'savepage' %}" method="post">
+    <form action="{% url 'editpage' %}" method="POST">
         {% csrf_token %}
 
-        <input type="hidden" name="titleq" required value="{{entrey_title}}">
-        <div class="">
+        <input type="hidden" name="titleq" required value="{{title}}">
+        <div class="flex flex-col">
             <textarea name="description"  cols="30" rows="5">{{content}}</textarea>
-            <button type="submit"> save page</button>
+            <button class="w-[10%] p-[10px] bg-blue-300  ml-[10px] mt-[10px] rounded text-[bolder]" type="submit"> save page</button>
         </div>
     </form>
 
